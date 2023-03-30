@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5b30589144d3b49a7af9b420afcefb, type: 3}
+  m_Name: GameController
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  type: 2
+  description: This is a cute game controller
+  displayedName: ProController
+  obtained: 1
+  GameModel: {fileID: 828219822314815495, guid: 4aac5a0551513c44ca3511c44c71d7c0, type: 3}
+  initialPosition: {fileID: 7072833984740164390, guid: 5f3d6e4041f493648874accce4bc425c, type: 3}
