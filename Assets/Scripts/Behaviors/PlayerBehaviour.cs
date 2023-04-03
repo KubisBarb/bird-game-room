@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ClearResourceInventory()
     {
+        Debug.Log("clearing inventory");
         resourceInventory.Container.Clear();
     }
 }
