@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class DebugController : MonoBehaviour
 {
@@ -9,43 +10,41 @@ public class DebugController : MonoBehaviour
     string input;
 
     //references
-    PlayerBehaviour player;
+    public PlayerBehaviour player;
 
-    public static DebugCommand inventory_resources_clear;
+    public static DebugCommand INVENORY_RESOURCES_CLEAR;
 
     public List<object> commandList;
 
-    /*public void OnReturn(InputValue value)
+    public void OnToggleDebug(InputValue value)
+    {
+        showConsole = !showConsole;
+    }
+
+    public void OnReturn(InputValue value)
     {
         if (showConsole)
         {
             HandleInput();
             input = "";
         }
-    }*/
+    }
 
     private void Awake()
     {
-        player = GameObject.Find("player").GetComponent<PlayerBehaviour>();
+        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
 
-        inventory_resources_clear = new DebugCommand("inventory_resources_clear", "Completely clears reource inventory", "invetory_resources_clear", () =>
+        INVENORY_RESOURCES_CLEAR = new DebugCommand("inventory_resources_clear", "Completely clears reource inventory", "invetory_resources_clear", () =>
         {
             player.ClearResourceInventory();
         });
 
         commandList = new List<object>
         {
-            inventory_resources_clear,
+            INVENORY_RESOURCES_CLEAR,
         };
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            showConsole = !showConsole;
-        }
-    }
 
     private void OnGUI()
     {
@@ -61,7 +60,18 @@ public class DebugController : MonoBehaviour
 
     private void HandleInput()
     {
+        for (int i = 0; i < commandList.Count; i++)
+        {
+            DebugCommandBase commandBase = commandList[i] as DebugCommandBase;
 
+            if (input.Contains(commandBase.commandID))
+            {
+                if (commandList[i] as DebugCommand != null)
+                {
+                    (commandList[i] as DebugCommand).Invoke();
+                }
+            }
+        }
     }
 
     
