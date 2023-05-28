@@ -34,7 +34,8 @@ public class TimeManager : MonoBehaviour
             subTimerDuration = 0f;
         }
 
-        timeMultiplier = PlayerPrefs.GetFloat("TimeMultiplier");
+        if (PlayerPrefs.HasKey("TimeMultiplier"))
+            timeMultiplier = PlayerPrefs.GetFloat("TimeMultiplier");
 
         //update multiplier UI so it matches Player Prefs
         currentSpeedIndex = TimeMultiplierToIndex() % speedOptions.Length;
@@ -63,8 +64,6 @@ public class TimeManager : MonoBehaviour
             remainingTimeText.text = "00:00";
             timerStarted = false;
             startButton.interactable = true;
-            PlayerPrefs.SetString("TimerFinished", "true");
-            PlayerPrefs.DeleteKey("TimerFinished");
             PlayerPrefs.DeleteKey("SavedTime");
             PlayerPrefs.DeleteKey("SubTimerDuration");
             PlayerPrefs.Save();
@@ -94,8 +93,6 @@ public class TimeManager : MonoBehaviour
                 timerStarted = false;
                 remainingTime = 0;
                 startButton.interactable = true;
-                PlayerPrefs.SetString("TimerFinished", "true");
-                PlayerPrefs.DeleteKey("TimerFinished");
                 PlayerPrefs.DeleteKey("SavedTime");
                 PlayerPrefs.DeleteKey("SubTimerDuration");
                 PlayerPrefs.Save();
