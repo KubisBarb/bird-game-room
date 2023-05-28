@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour
     public Button startButton;
     public Button speedUpButton;
 
-    private float startTime;
+    //private float startTime;
     private bool timerStarted = false;
     public float timerDuration; // in minutes for easier testing
     private float subTimerDuration; // in seconds for easier code editing
@@ -24,8 +24,16 @@ public class TimeManager : MonoBehaviour
         speedUpButton.onClick.AddListener(SwitchSpeed);
 
         //Read the data saved in Player Prefs
-        startTime = PlayerPrefs.GetFloat("StartTime");
-        subTimerDuration = PlayerPrefs.GetFloat("SubTimerDuration");
+        if (PlayerPrefs.HasKey("SubTimerDuration"))
+        {
+            subTimerDuration = PlayerPrefs.GetFloat("SubTimerDuration");
+            timerStarted = true;
+        }
+        else
+        {
+            subTimerDuration = 0f;
+        }
+
         timeMultiplier = PlayerPrefs.GetFloat("TimeMultiplier");
 
         //update multiplier UI so it matches Player Prefs
@@ -33,7 +41,7 @@ public class TimeManager : MonoBehaviour
         speedUpButton.GetComponentInChildren<TextMeshProUGUI>().text = speedOptions[currentSpeedIndex];
 
         // Calculate the elapsed time
-        float elapsedTime = (Time.time - startTime) * timeMultiplier;
+        float elapsedTime = CalculateElapsedSeconds() * timeMultiplier;
 
         // Calculate the remaining time in seconds
         float remainingTime = subTimerDuration - elapsedTime;
@@ -41,12 +49,24 @@ public class TimeManager : MonoBehaviour
         // Check if the timer has finished while not in play mode
         if (remainingTime <= 0)
         {
-            timerStarted = false;
+            if (PlayerPrefs.HasKey("SubTimerDuration"))
+            {
+                Debug.Log("Timer has finished while you were not in play mode.");
+            }
+
+            // Convert remaining time to minutes and seconds
+            int minutes = (int)(remainingTime / 60f);
+            int seconds = (int)(remainingTime % 60f);
             remainingTime = 0f;
+
+            // Display the remaining time in MM:SS format
+            remainingTimeText.text = "00:00";
+            timerStarted = false;
             startButton.interactable = true;
             PlayerPrefs.SetString("TimerFinished", "true");
-            Debug.Log("Timer has finished while you were not in play mode.");
             PlayerPrefs.DeleteKey("TimerFinished");
+            PlayerPrefs.DeleteKey("SavedTime");
+            PlayerPrefs.DeleteKey("SubTimerDuration");
             PlayerPrefs.Save();
         }
         else
@@ -58,12 +78,12 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        timeText.text = GetSystemTime();
+        timeText.text = SetTimeUI();
 
         if (timerStarted)
         {
             // Calculate the elapsed time
-            float elapsedTime = (Time.time - startTime) * timeMultiplier;
+            float elapsedTime = CalculateElapsedSeconds() * timeMultiplier;
 
             // Calculate the remaining time in seconds
             float remainingTime = subTimerDuration - elapsedTime;
@@ -76,6 +96,8 @@ public class TimeManager : MonoBehaviour
                 startButton.interactable = true;
                 PlayerPrefs.SetString("TimerFinished", "true");
                 PlayerPrefs.DeleteKey("TimerFinished");
+                PlayerPrefs.DeleteKey("SavedTime");
+                PlayerPrefs.DeleteKey("SubTimerDuration");
                 PlayerPrefs.Save();
                 Debug.Log("Timer has finished!");
             }
@@ -89,7 +111,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private string GetSystemTime()
+    private string SetTimeUI()
     {
         // Get the current system time
         System.DateTime now = System.DateTime.Now;
@@ -105,8 +127,8 @@ public class TimeManager : MonoBehaviour
         if (!timerStarted)
         {
             // Store the current time as the start time
-            startTime = Time.time;
-            PlayerPrefs.SetFloat("StartTime", startTime);
+            SaveStartTime();
+
             timerStarted = true;
             startButton.interactable = false; // Disable the button when the timer starts
 
@@ -118,14 +140,17 @@ public class TimeManager : MonoBehaviour
 
     public void SwitchSpeed()
     {
-        // Calculate the elapsed time
-        float elapsedTime = (Time.time - startTime) * timeMultiplier;
-        subTimerDuration = subTimerDuration - elapsedTime;
-        PlayerPrefs.SetFloat("SubTimerDuration", subTimerDuration);
+        if (timerStarted)
+        {
+            // Calculate the elapsed time
+            float elapsedTime = CalculateElapsedSeconds() * timeMultiplier;
+            subTimerDuration = subTimerDuration - elapsedTime;
+            PlayerPrefs.SetFloat("SubTimerDuration", subTimerDuration);
+            PlayerPrefs.Save();
 
-        // Set a new start time because we are changing the multiplier        
-        startTime = Time.time;
-        PlayerPrefs.SetFloat("StartTime", startTime);
+            // Set a new start time because we are changing the multiplier
+            SaveStartTime();
+        }
 
         currentSpeedIndex = (currentSpeedIndex + 1) % speedOptions.Length;
         speedUpButton.GetComponentInChildren<TextMeshProUGUI>().text = speedOptions[currentSpeedIndex];
@@ -164,5 +189,28 @@ public class TimeManager : MonoBehaviour
             return 2;
         else
             return 3;
+    }
+
+    float CalculateElapsedSeconds()
+    {
+        if (PlayerPrefs.HasKey("SavedTime"))
+        {
+            string savedTimeString = PlayerPrefs.GetString("SavedTime");
+            System.DateTime savedTime = System.DateTime.ParseExact(savedTimeString, "yyyy-MM-dd HH:mm:ss", null);
+            System.TimeSpan timeSpan = System.DateTime.Now - savedTime;
+            float elapsedSeconds = (float)timeSpan.TotalSeconds;
+            return elapsedSeconds;
+        }
+
+        // If "SavedTime" key doesn't exist in PlayerPrefs, return 0 seconds
+        return 0f;
+    }
+
+    void SaveStartTime()
+    {
+        System.DateTime currentTime = System.DateTime.Now;
+        string formattedTime = currentTime.ToString("yyyy-MM-dd HH:mm:ss");
+        PlayerPrefs.SetString("SavedTime", formattedTime);
+        PlayerPrefs.Save();
     }
 }

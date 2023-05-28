@@ -4,27 +4,16 @@ using UnityEngine;
 
 public class TestTime : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        PlayerPrefs.SetString("SavedTime", "2023-05-28 17:54:00");
-        Debug.Log(CalculateElapsedSeconds());
+        float maxFloatValue = float.MaxValue;
+        int secondsInMinute = 60;
+        int minutesInHour = 60;
+        int hoursInDay = 24;
 
     }
+        float maxTimeInDays = maxFloatValue / (secondsInMinute * minutesInHour * hoursInDay);
 
-    float CalculateElapsedSeconds()
-    {
-        if (PlayerPrefs.HasKey("SavedTime"))
-        {
-            string savedTimeString = PlayerPrefs.GetString("SavedTime");
-            System.DateTime savedTime = System.DateTime.ParseExact(savedTimeString, "yyyy-MM-dd HH:mm:ss", null);
-            System.TimeSpan timeSpan = System.DateTime.Now - savedTime;
-            float elapsedSeconds = (float)timeSpan.TotalSeconds;
-            return elapsedSeconds;
-        }
-
-        // If "SavedTime" key doesn't exist in PlayerPrefs, return 0 seconds
-        return 0f;
+        Debug.Log(maxTimeInDays);
     }
-
 }
