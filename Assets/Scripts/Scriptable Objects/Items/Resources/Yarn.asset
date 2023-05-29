@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e63778d0023726b4985ecc65d72a65eb, type: 3}
-  m_Name: DefaultObject
+  m_Script: {fileID: 11500000, guid: 86ed1a44119bc9145875c9b19f208702, type: 3}
+  m_Name: Yarn
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  type: 0
-  description: This is a default test object.
+  type: 1
+  description: 
+  displayedName: 
+  resourceFamily: 0
