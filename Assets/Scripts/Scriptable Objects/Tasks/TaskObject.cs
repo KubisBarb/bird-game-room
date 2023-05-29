@@ -4,13 +4,14 @@ using UnityEngine;
 
 public enum TaskType
 {
-    Default
+    Default,
+    Resource
 }
 
 public abstract class TaskObject : ScriptableObject
 {
     public GameObject prefab;
     public TaskType type;
-    [TextArea(15, 20)]
+    [TextArea(5, 20)]
     public string description;
 }
