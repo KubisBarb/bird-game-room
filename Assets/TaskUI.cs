@@ -22,4 +22,9 @@ public class TaskUI : MonoBehaviour
     {
         taskManager.SendMessage("CompleteTask", this.gameObject);
     }
+
+    public void ClosePanel()
+    {
+        Destroy(this.gameObject);
+    }
 }

@@ -25,12 +25,13 @@ public class TaskManager : MonoBehaviour
 
     public void CompleteTask(GameObject taskPanel)
     {
-        taskPanel.GetComponent<TaskUI>().resourceTaskDisplaying.Initialize();
-        bool canHidePanel = this.gameObject.GetComponent<InventoryManager>().LoseLootCheck(taskPanel.GetComponent<TaskUI>().resourceTaskDisplaying.requiredItemsInventory);
+        var task = taskPanel.GetComponent<TaskUI>().resourceTaskDisplaying;
+        task.Initialize();
+        bool canHidePanel = this.gameObject.GetComponent<InventoryManager>().LoseLootCheck(task.requiredItemsInventory);
         
         if (canHidePanel)
         {
-            // TODO: Set task to completed
+            //task.isCompleted = true;
             DestroyPanel(taskPanel);
             Debug.Log("Task has been completed and UI panel has been discarded");
         }
@@ -44,27 +45,49 @@ public class TaskManager : MonoBehaviour
         }
         else
         {
-            GameObject singlePanel = Instantiate(singleTaskPanelPrefab, Vector3.zero, Quaternion.identity, overlayCanvas.transform);
-            singlePanel.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-
-            TaskUI panelDetails = singlePanel.GetComponent<TaskUI>();
-            panelDetails.header.text = resourceTask.displayedName;
-            panelDetails.description.text = resourceTask.taskDescriptionToPlayer;
-            panelDetails.resourceTaskDisplaying = resourceTask;
-            iconsPanel = panelDetails.iconPanel.GetComponent<RectTransform>();
-
-            Sprite[] arrayOfIcons = new Sprite[resourceTask.RequiredItems.Count];
-            string[] arrayOfAmounts = new string[resourceTask.RequiredItems.Count];
-
-            for (int i = 0; i < resourceTask.RequiredItems.Count; i++)
+            if (resourceTask.isCompleted)
             {
-                arrayOfIcons[i] = resourceTask.RequiredItems[i].item.icon;
-                arrayOfAmounts[i] = resourceInventory.GetMaterialAmount(resourceTask.RequiredItems[i].item).ToString() + "/" + resourceTask.RequiredItems[i].amount.ToString();
+                Debug.Log("Task " + resourceTask + " has been already completed!");
             }
+            else
+            {
+                GameObject singlePanel = Instantiate(singleTaskPanelPrefab, Vector3.zero, Quaternion.identity, overlayCanvas.transform);
+                singlePanel.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
-            DrawSquareGrid(resourceTask.RequiredItems.Count, arrayOfIcons, arrayOfAmounts);
+                TaskUI panelDetails = singlePanel.GetComponent<TaskUI>();
+                panelDetails.header.text = resourceTask.displayedName;
+                panelDetails.description.text = resourceTask.taskDescriptionToPlayer;
+                panelDetails.resourceTaskDisplaying = resourceTask;
+                iconsPanel = panelDetails.iconPanel.GetComponent<RectTransform>();
 
-            displayedTasks.Add(singlePanel);
+                Sprite[] arrayOfIcons = new Sprite[resourceTask.RequiredItems.Count];
+                string[] arrayOfAmounts = new string[resourceTask.RequiredItems.Count];
+                int sufficientResources = 0;
+
+                for (int i = 0; i < resourceTask.RequiredItems.Count; i++)
+                {
+                    arrayOfIcons[i] = resourceTask.RequiredItems[i].item.icon;
+                    arrayOfAmounts[i] = resourceInventory.GetMaterialAmount(resourceTask.RequiredItems[i].item).ToString() + "/" + resourceTask.RequiredItems[i].amount.ToString();
+                    
+                    if (resourceInventory.GetMaterialAmount(resourceTask.RequiredItems[i].item) >= resourceTask.RequiredItems[i].amount)
+                    {
+                        sufficientResources++;
+                    }
+                }
+
+                DrawSquareGrid(resourceTask.RequiredItems.Count, arrayOfIcons, arrayOfAmounts);
+
+                if (sufficientResources >= resourceTask.RequiredItems.Count)
+                {
+                    panelDetails.giveButton.GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    panelDetails.giveButton.GetComponent<Button>().interactable = false;
+                }
+
+                displayedTasks.Add(singlePanel);
+            }
         }
     }
 

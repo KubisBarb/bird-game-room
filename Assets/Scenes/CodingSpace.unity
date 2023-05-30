@@ -2183,7 +2183,7 @@ MonoBehaviour:
         m_MethodName: DisplayResourceTask
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e0dba1e9cef909542b9ddbd2f7e3d1f0, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: b0551ccf7a8f8ce4cb82b07e5ffff10d, type: 2}
           m_ObjectArgumentAssemblyTypeName: ResourceTask, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

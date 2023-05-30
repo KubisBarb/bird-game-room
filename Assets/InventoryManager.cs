@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (InventorySlot slot in lootToLose.Container)
         {
-            Debug.Log("Removing pack of stuff");
+            Debug.Log("Removing pack of stuff from inventory");
             resourceInventory.RemoveItem(slot.item, slot.amount);
         }
     }
