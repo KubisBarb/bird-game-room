@@ -16,12 +16,7 @@ public class ResourceTask : Task
 [System.Serializable]
 public class TaskSlot
 {
-    public string name;
-    public ItemObject item;
+    //public string name;
+    public ResourceObject item;
     public int amount;
-    public TaskSlot(ItemObject _item, int _amount)
-    {
-        item = _item;
-        amount = _amount;
-    }
 }

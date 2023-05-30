@@ -15,5 +15,6 @@ MonoBehaviour:
   prefab: {fileID: 0}
   type: 1
   description: 
-  displayedName: 
+  icon: {fileID: 21300000, guid: a544f87579bfd0e408590f2005992442, type: 3}
+  displayedName: Yarn
   resourceFamily: 0

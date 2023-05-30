@@ -6,6 +6,8 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
+
+
     public void AddItem(ItemObject _item, int _amount)
     {
         bool hasItem = false;
@@ -30,6 +32,47 @@ public class InventoryObject : ScriptableObject
             Container.Add(new InventorySlot(_item, _amount));
         }
     }
+
+    public bool RemoveItem(ItemObject item, int amount)
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item == item)
+            {
+                if (Container[i].amount >= amount)
+                {
+                    Container[i].RemoveAmount(amount);
+                    if (Container[i].amount == 0)
+                    {
+                        Container.RemoveAt(i);
+                    }
+                    return true; // Removal successful
+                }
+                else
+                {
+                    Debug.Log("Not enough " + item.name + " in inventory!");
+                    return false; // Not enough items in inventory
+                }
+            }
+        }
+
+        Debug.Log(item.name + " not found in inventory!");
+        return false; // Item not found in inventory
+    }
+
+    public int GetMaterialAmount(ItemObject objectToSearch)
+    {
+        foreach (InventorySlot slot in Container)
+        {
+            if (slot.item == objectToSearch)
+            {
+                return slot.amount;
+            }
+        }
+
+        Debug.Log("Material not found in inventory");
+        return 0;
+    }
 }
 
 [System.Serializable]
@@ -45,5 +88,10 @@ public class InventorySlot
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public void RemoveAmount(int value)
+    {
+        amount -= value;
     }
 }

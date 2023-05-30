@@ -16,9 +16,10 @@ public enum ResourceFamily
 [CreateAssetMenu(fileName = "New Resource Object", menuName = "Inventory System/Items/Resource")]
 public class ResourceObject : ItemObject
 {
+    public Sprite icon;
     public string displayedName;
     public ResourceFamily resourceFamily;
-    public int quantity;
+    //public int quantity;
 
     public void Awake()
     {

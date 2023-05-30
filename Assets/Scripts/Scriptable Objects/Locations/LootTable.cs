@@ -12,7 +12,7 @@ public class LootTable : ScriptableObject
 public class LootOption
 {
     public string? resourceName;
-    public ResourceObject? resourceObject;
+    public ItemObject? resourceObject;
     public float rarityChance = 0f;
     public int minQuantity = 0;
     public int maxQuantity = 0;
