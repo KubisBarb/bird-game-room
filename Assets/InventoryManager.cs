@@ -26,4 +26,34 @@ public class InventoryManager : MonoBehaviour
             resourceInventory.AddItem(slot.item, slot.amount);
         }
     }
+
+    public bool LoseLootCheck(InventoryObject lootToLose)
+    {
+        bool canBeRemoved = false;
+
+        foreach (InventorySlot slot in lootToLose.Container)
+        {
+            canBeRemoved = resourceInventory.RemoveItemCheck(slot.item, slot.amount);
+        }
+
+        if (canBeRemoved)
+        {
+            LoseLoot(lootToLose);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Problem removing items from inventory. Amount might not be anough or some item is not in the inventory at all.");
+            return false;
+        }
+    }
+
+    public void LoseLoot(InventoryObject lootToLose)
+    {
+        foreach (InventorySlot slot in lootToLose.Container)
+        {
+            Debug.Log("Removing pack of stuff");
+            resourceInventory.RemoveItem(slot.item, slot.amount);
+        }
+    }
 }

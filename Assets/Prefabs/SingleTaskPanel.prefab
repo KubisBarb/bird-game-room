@@ -332,7 +332,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4058721045174637894}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2173274862857537582}
+        m_TargetAssemblyTypeName: TaskUI, Assembly-CSharp
+        m_MethodName: GiveMaterials
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4058721045315314486
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +441,8 @@ MonoBehaviour:
   header: {fileID: 5450621276747154727}
   description: {fileID: 3389055002966790945}
   iconPanel: {fileID: 4058721045074159629}
-  givebUtton: {fileID: 5450621276747154727}
+  giveButton: {fileID: 4058721045174637889}
+  resourceTaskDisplaying: {fileID: 0}
 --- !u!1 &7386974649641892437
 GameObject:
   m_ObjectHideFlags: 0

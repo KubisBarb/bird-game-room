@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
 
 public class TaskManager : MonoBehaviour
 {
     public GameObject singleTaskPanelPrefab;
+
+    List<GameObject> displayedTasks = new List<GameObject>();
 
     public Canvas overlayCanvas;
     InventoryObject resourceInventory;
@@ -18,6 +21,19 @@ public class TaskManager : MonoBehaviour
     private void Start()
     {
         resourceInventory = this.gameObject.GetComponent<InventoryManager>().resourceInventory;
+    }
+
+    public void CompleteTask(GameObject taskPanel)
+    {
+        taskPanel.GetComponent<TaskUI>().resourceTaskDisplaying.Initialize();
+        bool canHidePanel = this.gameObject.GetComponent<InventoryManager>().LoseLootCheck(taskPanel.GetComponent<TaskUI>().resourceTaskDisplaying.requiredItemsInventory);
+        
+        if (canHidePanel)
+        {
+            // TODO: Set task to completed
+            DestroyPanel(taskPanel);
+            Debug.Log("Task has been completed and UI panel has been discarded");
+        }
     }
 
     public void DisplayResourceTask(ResourceTask resourceTask)
@@ -34,6 +50,7 @@ public class TaskManager : MonoBehaviour
             TaskUI panelDetails = singlePanel.GetComponent<TaskUI>();
             panelDetails.header.text = resourceTask.displayedName;
             panelDetails.description.text = resourceTask.taskDescriptionToPlayer;
+            panelDetails.resourceTaskDisplaying = resourceTask;
             iconsPanel = panelDetails.iconPanel.GetComponent<RectTransform>();
 
             Sprite[] arrayOfIcons = new Sprite[resourceTask.RequiredItems.Count];
@@ -46,6 +63,8 @@ public class TaskManager : MonoBehaviour
             }
 
             DrawSquareGrid(resourceTask.RequiredItems.Count, arrayOfIcons, arrayOfAmounts);
+
+            displayedTasks.Add(singlePanel);
         }
     }
 
@@ -93,5 +112,10 @@ public class TaskManager : MonoBehaviour
         squareRectTransform.sizeDelta = new Vector2(iconSize, iconSize);
         iconPlaceholder.GetComponent<Image>().sprite = icon;
         iconPlaceholder.GetComponentInChildren<TextMeshProUGUI>().text = amount;
+    }
+
+    void DestroyPanel(GameObject panelToDestroy)
+    {
+        Destroy(panelToDestroy);
     }
 }

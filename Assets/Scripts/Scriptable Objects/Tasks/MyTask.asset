@@ -11,16 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f78f6720f862acc4dac9950022f69a7a, type: 3}
   m_Name: MyTask
-  m_EditorClassIdentifier: Assembly-CSharp::ResourceTask
+  m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   type: 1
-  description: My testin task
+  description: i test stuff here
   isUnlocked: 1
   isCompleted: 0
-  displayedName: Meno
-  taskDescriptionToPlayer: tu nieco napiseme
+  displayedName: El Feathero
+  taskDescriptionToPlayer: Mr Nikita needs this very important delivery for his event.
   requiredTasks: []
   followingTasks: []
   RequiredItems:
   - item: {fileID: 11400000, guid: 3e06ee7b87cc2c3469fe84430a91d9de, type: 2}
-    amount: 10
+    amount: 5
+  requiredItemsInventory: {fileID: 0}

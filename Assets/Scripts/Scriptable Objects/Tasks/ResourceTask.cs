@@ -6,10 +6,22 @@ using UnityEngine;
 public class ResourceTask : Task
 {
     public List<TaskSlot> RequiredItems = new List<TaskSlot>();
-    
+    [HideInInspector] public InventoryObject requiredItemsInventory;
+
     private void Awake()
     {
         type = TaskType.Resource;
+    }
+
+    public void Initialize()
+    {
+        requiredItemsInventory = ScriptableObject.CreateInstance<InventoryObject>();
+
+        foreach (TaskSlot taskSlot in RequiredItems)
+        {
+            InventorySlot newSlot = new InventorySlot(taskSlot.item, taskSlot.amount);
+            requiredItemsInventory.Container.Add(newSlot);
+        }
     }
 }
 

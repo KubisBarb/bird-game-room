@@ -33,7 +33,37 @@ public class InventoryObject : ScriptableObject
         }
     }
 
-    public bool RemoveItem(ItemObject item, int amount)
+    public bool RemoveItemCheck(ItemObject item, int amount)
+    {
+        int problems = 1;
+
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item == item)
+            {
+                if (!(Container[i].amount >= amount))
+                {
+                    Debug.Log("Not enough " + item.name + " in inventory!");
+                    problems++;
+                }
+                else
+                {
+                    problems--;
+                }
+            }
+        }
+
+        if (problems > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void RemoveItem(ItemObject item, int amount)
     {
         for (int i = 0; i < Container.Count; i++)
         {
@@ -46,18 +76,13 @@ public class InventoryObject : ScriptableObject
                     {
                         Container.RemoveAt(i);
                     }
-                    return true; // Removal successful
                 }
                 else
                 {
                     Debug.Log("Not enough " + item.name + " in inventory!");
-                    return false; // Not enough items in inventory
                 }
             }
         }
-
-        Debug.Log(item.name + " not found in inventory!");
-        return false; // Item not found in inventory
     }
 
     public int GetMaterialAmount(ItemObject objectToSearch)

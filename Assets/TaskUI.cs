@@ -8,5 +8,18 @@ public class TaskUI : MonoBehaviour
     public TextMeshProUGUI header;
     public TextMeshProUGUI description;
     public GameObject iconPanel;
-    public TextMeshProUGUI givebUtton;
+    public GameObject giveButton;
+    public ResourceTask resourceTaskDisplaying;
+
+    TaskManager taskManager;
+
+    private void Start()
+    {
+        taskManager = GameObject.Find("GameManager").GetComponent<TaskManager>();
+    }
+
+    public void GiveMaterials()
+    {
+        taskManager.SendMessage("CompleteTask", this.gameObject);
+    }
 }
