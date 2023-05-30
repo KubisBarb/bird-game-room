@@ -5,6 +5,19 @@ using System.Collections.Generic;
 public class LootTable : ScriptableObject
 {
     public List<LootOption> lootOptions = new List<LootOption>();
+
+    public float GetRarityByItem(ItemObject item)
+    {
+        foreach (LootOption lootOption in lootOptions)
+        {
+            if (lootOption.resourceObject == item)
+            {
+                return lootOption.rarityChance;
+            }
+        }
+
+        return -1f;
+    }
 }
 
 [System.Serializable]

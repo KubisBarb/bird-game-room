@@ -12,9 +12,9 @@ public class InventoryManager : MonoBehaviour
         resourceInventory.AddItem(_item, _amount);
     }*/
 
-    public void LootLocation(Location location)
+    public void LootLocation(Location location, BirdObject bird)
     {
-        InventoryObject lootPack = location.CalculateLoot();
+        InventoryObject lootPack = location.CalculateLoot();    // This the the loot location has produced
         ReceiveLoot(lootPack);
     }
 

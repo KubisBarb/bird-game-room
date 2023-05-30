@@ -8,7 +8,6 @@ public class Location : LocationObject
     public InventoryObject CalculateLoot()
     {
         // Creates a temporary inventory for the items location produced
-        //InventoryObject lootPack = new InventoryObject();
         InventoryObject lootPack = ScriptableObject.CreateInstance<InventoryObject>();
 
         foreach (LootOption option in lootTable.lootOptions)
