@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7a3a56d19080042bc30206aeaaaba2, type: 3}
   m_Name: Pidgeon
   m_EditorClassIdentifier: 
-  isUnlocked: 0
-  level: 0
-  specialLocations: []
-  capacity: 0
-  speed: 0
+  isUnlocked: 1
+  level: 1
+  specialLocations:
+  - {fileID: 11400000, guid: e467d2a3c0316d54da1394c7a54d1ef6, type: 2}
+  capacity: 10
+  intelligence: 2
+  speed: 1
