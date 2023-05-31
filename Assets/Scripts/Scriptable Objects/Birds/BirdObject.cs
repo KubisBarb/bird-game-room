@@ -6,6 +6,7 @@ public class BirdObject : ScriptableObject
     public bool isUnlocked;
     public int level;
     public Location[] specialLocations;
+    public Sprite portrait;
 
     [Tooltip("Represents maximum number of items a bird can bring from a location, even if it produces more.")]
     [Range(0, 25)]

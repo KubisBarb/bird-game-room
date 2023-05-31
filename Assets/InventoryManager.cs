@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public InventoryObject resourceInventory;
-    public BirdObject testBird;
-    public Location testLocation;
+    [SerializeField]
+    private int gems;
+    private const string GemsKey = "Gems";
 
-    private void Start()
+    public InventoryObject resourceInventory;
+    public InventoryObject decorationInventory;
+
+    private void Awake()
     {
-        LootLocation(testLocation, testBird);
+        // Load the coins value from PlayerPrefs when the game starts
+        gems = PlayerPrefs.GetInt(GemsKey);
+    }
+
+    private void OnDestroy()
+    {
+        // Save the coins value to PlayerPrefs when the game closes or object is destroyed
+        PlayerPrefs.SetInt(GemsKey, gems);
+        PlayerPrefs.Save();
     }
 
     public void LootLocation(Location location, BirdObject bird)
