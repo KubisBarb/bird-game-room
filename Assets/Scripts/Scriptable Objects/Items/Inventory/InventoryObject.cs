@@ -7,23 +7,6 @@ public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
 
-
-    // Continue here
-    public List<InventorySlot> GetSortedInventoryByRarity(InventoryObject inventoryToSort, LootTable lootTable)
-    {
-        List<InventorySlot> sortedInventory = new List<InventorySlot>(inventoryToSort.Container);
-
-        sortedInventory.Sort((a, b) => GetItemRarity(lootTable, a.item).CompareTo(GetItemRarity(lootTable, b.item)));
-
-        return sortedInventory;
-    }
-
-    private float GetItemRarity(LootTable lootTable, ItemObject item)
-    {
-        return lootTable.GetRarityByItem(item);
-    }
-
-
     public void AddItem(ItemObject _item, int _amount)
     {
         bool hasItem = false;
@@ -113,6 +96,18 @@ public class InventoryObject : ScriptableObject
 
         Debug.Log("Material not found in inventory");
         return 0;
+    }
+
+    public int GetTotalItemCount(InventoryObject inventory)
+    {
+        int totalCount = 0;
+
+        foreach (InventorySlot slot in inventory.Container)
+        {
+            totalCount += slot.amount;
+        }
+
+        return totalCount;
     }
 }
 

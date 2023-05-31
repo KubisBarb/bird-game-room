@@ -5,17 +5,92 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public InventoryObject resourceInventory;
+    public BirdObject testBird;
+    public Location testLocation;
 
-    /*public void AddToInventory(ItemObject _item, int _amount)
+    private void Start()
     {
-        Debug.Log("ManagerAddedToInventory");
-        resourceInventory.AddItem(_item, _amount);
-    }*/
+        LootLocation(testLocation, testBird);
+    }
 
     public void LootLocation(Location location, BirdObject bird)
     {
-        InventoryObject lootPack = location.CalculateLoot();    // This the the loot location has produced
-        ReceiveLoot(lootPack);
+        InventoryObject lootFromLocation = location.CalculateLoot();    // This the the loot location has produced
+        lootFromLocation = GetSortedInventoryByRarity(lootFromLocation, location.lootTable);    // These are the same items but sorted by rarity
+
+        InventoryObject finalLoot = ScriptableObject.CreateInstance<InventoryObject>();
+
+        // We pick the best items intelligence times
+
+        for (int j = 0; j < bird.intelligence; j++)
+        {
+            if (bird.capacity - 1 > j)
+            {
+                if (lootFromLocation.Container[0].amount > 0)
+                {
+                    finalLoot.AddItem(lootFromLocation.Container[0].item, 1);
+                    lootFromLocation.RemoveItem(lootFromLocation.Container[0].item, 1);
+                }
+                else
+                {
+                    Debug.Log("Empty inventory slot found.");
+                }
+            }
+            else
+            {
+                Debug.Log("Birds intelligence is higher that it's capacity");
+            }
+        }
+
+        // We mix the remaining items and pick the rest of it randomly
+
+        List<ItemObject> mixedLoot = new List<ItemObject>();
+
+        foreach (InventorySlot slot in lootFromLocation.Container)
+        {
+            for (int j = 0; j < slot.amount; j++)
+            {
+                mixedLoot.Add(slot.item);
+            }
+        }
+
+        // Check if we don't have too many items in inventory already
+
+        if (finalLoot.GetTotalItemCount(finalLoot) != bird.intelligence)
+        {
+            Debug.Log("Birds intelligence picked more items than allowed. Difference: " + (finalLoot.GetTotalItemCount(finalLoot) != bird.intelligence).ToString());
+        }
+        else
+        {
+            // We choose randomly what to add
+
+            if (mixedLoot.Count > 0 && finalLoot.GetTotalItemCount(finalLoot) < bird.capacity)
+            {
+                for (int i = 0; i < bird.capacity - bird.intelligence; i++)
+                {
+                    var randomItem = GetRandomItem(mixedLoot);
+                    finalLoot.AddItem(randomItem, 1);
+                    mixedLoot.Remove(randomItem);
+                }
+            }
+        }
+
+        ReceiveLoot(finalLoot);
+    }
+
+    public InventoryObject GetSortedInventoryByRarity(InventoryObject inventoryToSort, LootTable lootTable)
+    {
+        InventoryObject sortedInventory = ScriptableObject.CreateInstance<InventoryObject>();
+        sortedInventory.Container = inventoryToSort.Container;
+
+        sortedInventory.Container.Sort((a, b) => GetItemRarity(lootTable, a.item).CompareTo(GetItemRarity(lootTable, b.item)));
+
+        return sortedInventory;
+    }
+
+    private float GetItemRarity(LootTable lootTable, ItemObject item)
+    {
+        return lootTable.GetRarityByItem(item);
     }
 
     public void ReceiveLoot(InventoryObject calculatedLoot)
@@ -55,5 +130,16 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Removing pack of stuff from inventory");
             resourceInventory.RemoveItem(slot.item, slot.amount);
         }
+    }
+
+    public ItemObject GetRandomItem<ItemObject>(List<ItemObject> list)
+    {
+        if (list.Count == 0)
+        {
+            return default(ItemObject);
+        }
+
+        int randomIndex = Random.Range(0, list.Count);
+        return list[randomIndex];
     }
 }

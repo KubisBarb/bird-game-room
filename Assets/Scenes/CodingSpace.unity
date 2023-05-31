@@ -1838,6 +1838,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceInventory: {fileID: 11400000, guid: 33dc230b19193284f8b6167cf90b0020, type: 2}
+  testBird: {fileID: 11400000, guid: a9fdba94eb8c6f147a28b945c3398c26, type: 2}
+  testLocation: {fileID: 11400000, guid: e467d2a3c0316d54da1394c7a54d1ef6, type: 2}
 --- !u!114 &701421963
 MonoBehaviour:
   m_ObjectHideFlags: 0

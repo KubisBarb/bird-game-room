@@ -15,11 +15,11 @@ MonoBehaviour:
   lootOptions:
   - resourceName: Feather
     resourceObject: {fileID: 11400000, guid: 3e06ee7b87cc2c3469fe84430a91d9de, type: 2}
-    rarityChance: 1
-    minQuantity: 3
-    maxQuantity: 7
+    rarityChance: 0.5
+    minQuantity: 10
+    maxQuantity: 20
   - resourceName: Yarn
     resourceObject: {fileID: 11400000, guid: 56849964841828e459cb99e5811f47c9, type: 2}
-    rarityChance: 0.1
-    minQuantity: 1
-    maxQuantity: 2
+    rarityChance: 1
+    minQuantity: 3
+    maxQuantity: 5
