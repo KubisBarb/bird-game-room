@@ -2072,7 +2072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &605110704
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2690,6 +2690,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42cbbbe4a061b7408d89f7d61e4f6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIOverlays:
+  - {fileID: 605110703}
+  - {fileID: 911251686}
+  - {fileID: 2074258573}
+  - {fileID: 1536707449}
+  - {fileID: 549695605}
+  clearUIOnStart: 1
 --- !u!1 &794923796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2878,7 +2885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &911251687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7757,7 +7764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2133131195
 RectTransform:
   m_ObjectHideFlags: 0
