@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum FlightStatus
 {
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public List<BirdObject> theNest = new List<BirdObject>();
 
     public FlightStatus flightStatus;
+    public TextMeshProUGUI flightStatusText;
 
     public GameObject activeBirdOverlay;
 
@@ -28,6 +30,8 @@ public class Player : MonoBehaviour
             activeBirdOverlay.GetComponent<ActiveBirdUI>().birdPortrait.sprite = activeBird.portrait;
             activeBirdOverlay.GetComponent<ActiveBirdUI>().nameText.text = activeBird.name;
         }
+
+        flightStatusText.text = flightStatus.ToString();
     }
 
 
