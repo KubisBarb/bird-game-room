@@ -11,7 +11,7 @@ public class TimeManager : MonoBehaviour
 
     //private float startTime;
     private bool timerStarted = false;
-    public float timerDuration; // in minutes for easier testing
+    public float timerDurationMinutes; // in minutes for easier testing
     private float subTimerDuration; // in seconds for easier code editing
     private float timeMultiplier = 1f;
 
@@ -129,7 +129,7 @@ public class TimeManager : MonoBehaviour
             timerStarted = true;
             startButton.interactable = false; // Disable the button when the timer starts
 
-            subTimerDuration = timerDuration * 60f;
+            subTimerDuration = timerDurationMinutes * 60f;
             PlayerPrefs.SetFloat("SubTimerDuration", subTimerDuration);
             PlayerPrefs.Save();
         }

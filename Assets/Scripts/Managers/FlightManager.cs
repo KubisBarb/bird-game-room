@@ -10,6 +10,16 @@ public class FlightManager : MonoBehaviour
     public TextMeshProUGUI queueLengthText;
     public GameObject circlePrefab;
     List<GameObject> circleInstances = new List<GameObject>();
+    public GameObject detailsPopupPlaceholder;
+    GameObject detailsPanelInstance;
+    UIManager uIManager;
+    TimeManager timeManager;
+
+    private void Start()
+    {
+        uIManager = this.gameObject.GetComponent<UIManager>();
+        timeManager = this.gameObject.GetComponent<TimeManager>();
+    }
 
     // Function to add a destination to the queue
     public void AddDestination(Location destination)
@@ -28,7 +38,12 @@ public class FlightManager : MonoBehaviour
         Debug.Log("Added destination: " + destination);
 
         // Draw UI indicator of queue
-        DrawCircle();
+        // DrawCircle();    // Bug: the circle now gets drawn over circle in the ui and not over map
+        // Instead we redraw the queue panel after each add/remove
+        uIManager.RedrawQueuePanelIcons();
+
+        // Adds waiting time to time manager
+        timeManager.timerDurationMinutes += destination.searchDurationMinutes;
 
         // Update UI information about the queue length
         UpdateQueueLengthUI();
@@ -37,6 +52,8 @@ public class FlightManager : MonoBehaviour
     // Function to reset the destination queue
     public void ResetQueue()
     {
+        uIManager.RedrawQueuePanelIcons(true);
+
         destinationQueue.Clear();
         Debug.Log("Destination queue has been reset!");
 
@@ -46,16 +63,23 @@ public class FlightManager : MonoBehaviour
             Destroy(circle);
         }
 
+        timeManager.timerDurationMinutes = 0f;
+
         // Update UI information about the queue length
         UpdateQueueLengthUI();
     }
 
     // Update the UI information about the queue length
-    private void UpdateQueueLengthUI()
+    public void UpdateQueueLengthUI()
     {
         if (queueLengthText != null)
         {
-            queueLengthText.text = "Queue Length: " + destinationQueue.Count.ToString() + "/" + this.gameObject.GetComponent<Player>().activeBird.level;
+            int minutes = Mathf.FloorToInt(timeManager.timerDurationMinutes);
+            int seconds = Mathf.FloorToInt((timeManager.timerDurationMinutes - minutes) * 60f);
+
+            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+            queueLengthText.text = destinationQueue.Count.ToString() + "/" + this.gameObject.GetComponent<Player>().activeBird.level + " stops scheduled \nFlight time: " + formattedTime;
         }
     }
 
@@ -76,4 +100,26 @@ public class FlightManager : MonoBehaviour
             newCircle.GetComponentInChildren<TextMeshProUGUI>().text = destinationQueue.Count.ToString();
         }
     }
+
+    public void ShowLocationPanel(Location location)
+    {
+        if (!detailsPanelInstance)
+        {
+            detailsPanelInstance = Instantiate(location.panelPrefab, detailsPopupPlaceholder.transform);
+        }
+
+        //
+
+        // Disable or enable based queue capacity
+        if (destinationQueue.Count == this.gameObject.GetComponent<Player>().activeBird.level)
+        {
+            detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.interactable = false;
+        }
+        else
+        {
+            detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.interactable = true;
+        }
+    }
+
+    
 }

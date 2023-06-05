@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Tesco
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  searchDuration: 0
+  searchDurationMinutes: 0.5
   birdSpeciesRequirement: []
   lootTable: {fileID: 11400000, guid: 3c81a9f9ec8fe17499b280301113d325, type: 2}
   description: 
+  icon: {fileID: 21300000, guid: 9dbb62a64c7bd6e45a60967574fa142c, type: 3}
+  panelPrefab: {fileID: 7437790298836715012, guid: 477f245a136ab074ab9aa0e1222e67b1, type: 3}

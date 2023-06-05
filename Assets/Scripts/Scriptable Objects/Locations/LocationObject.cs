@@ -6,7 +6,7 @@ public abstract class LocationObject : ScriptableObject
 {
     [Header("Basic Settings")]
     public GameObject prefab;
-    public float searchDuration;
+    public float searchDurationMinutes;
 
     [Space(10)]
     public string[] birdSpeciesRequirement;
@@ -17,6 +17,9 @@ public abstract class LocationObject : ScriptableObject
     [Header("Extra")]
     [TextArea(5, 20)]
     public string description;
+
+    public Sprite icon;
+    public GameObject panelPrefab;
 
 }
 
