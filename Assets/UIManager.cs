@@ -32,13 +32,13 @@ public class UIManager : MonoBehaviour
     public void HideObject(GameObject targetObject)
     {
         targetObject.SetActive(false);
+
         if (targetObject.tag == "Map overlay")
         {
             for (int i = 0; i < 5; i++)    // For capacity times it shows the holders
             {
                 scheduleSlotHolders[i].SetActive(false);
                 scheduleSlotHolders[i].GetComponent<Image>().sprite = null;
-                //scheduleSlotHolders[i].GetComponentInChildren<Image>().enabled = true;
             }
         }
     }
@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     public void ShowObject(GameObject targetObject)
     {
         targetObject.SetActive(true);
+
         if (targetObject.tag == "Map overlay")
         {
             // Update Ui image with sprite from active bird

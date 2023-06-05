@@ -14,11 +14,13 @@ public class FlightManager : MonoBehaviour
     GameObject detailsPanelInstance;
     UIManager uIManager;
     TimeManager timeManager;
+    Player player;
 
     private void Start()
     {
         uIManager = this.gameObject.GetComponent<UIManager>();
         timeManager = this.gameObject.GetComponent<TimeManager>();
+        player = this.gameObject.GetComponent<Player>();
     }
 
     // Function to add a destination to the queue
@@ -83,6 +85,7 @@ public class FlightManager : MonoBehaviour
         }
     }
 
+    /*
     public void DrawCircle()
     {
         // Instantiate a prefab or update UI elements to reflect the new destination
@@ -100,6 +103,7 @@ public class FlightManager : MonoBehaviour
             newCircle.GetComponentInChildren<TextMeshProUGUI>().text = destinationQueue.Count.ToString();
         }
     }
+    */
 
     public void ShowLocationPanel(Location location)
     {
@@ -108,18 +112,25 @@ public class FlightManager : MonoBehaviour
             detailsPanelInstance = Instantiate(location.panelPrefab, detailsPopupPlaceholder.transform);
         }
 
-        //
-
-        // Disable or enable based queue capacity
-        if (destinationQueue.Count == this.gameObject.GetComponent<Player>().activeBird.level)
+        // Show or hide the button based on flight status
+        if (player.flightStatus == FlightStatus.Waiting)
         {
-            detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.interactable = false;
+            detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.gameObject.SetActive(true);
+
+            // Disable or enable based queue capacity
+            if (destinationQueue.Count == this.gameObject.GetComponent<Player>().activeBird.level)
+            {
+                detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.interactable = false;
+            }
+            else
+            {
+                detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.interactable = true;
+            }
         }
         else
         {
-            detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.interactable = true;
+            detailsPanelInstance.GetComponent<DetailsPopupUI>().addLocationButton.gameObject.SetActive(false);
         }
     }
-
     
 }

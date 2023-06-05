@@ -18,10 +18,14 @@ public class TimeManager : MonoBehaviour
     private string[] speedOptions = { "1x", "2x", "4x", "8x" };
     private int currentSpeedIndex = 0;
 
+    Player player;
+
     private void Start()
     {
         startButton.onClick.AddListener(StartTimer);
         speedUpButton.onClick.AddListener(SwitchSpeed);
+
+        player = this.gameObject.GetComponent<Player>();
 
         //Read the data saved in Player Prefs
         if (PlayerPrefs.HasKey("SubTimerDuration"))
@@ -97,6 +101,7 @@ public class TimeManager : MonoBehaviour
                 PlayerPrefs.DeleteKey("SubTimerDuration");
                 PlayerPrefs.Save();
                 Debug.Log("Timer has finished!");
+                player.flightStatus = FlightStatus.Waiting;
             }
 
             // Convert remaining time to minutes and seconds
@@ -132,6 +137,7 @@ public class TimeManager : MonoBehaviour
             subTimerDuration = timerDurationMinutes * 60f;
             PlayerPrefs.SetFloat("SubTimerDuration", subTimerDuration);
             PlayerPrefs.Save();
+            player.flightStatus = FlightStatus.BirdOutside;
         }
     }
 
