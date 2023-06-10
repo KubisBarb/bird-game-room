@@ -20,6 +20,7 @@ public class TimeManager : MonoBehaviour
 
     Player player;
     UIManager uIManager;
+    FlightManager flightManager;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class TimeManager : MonoBehaviour
 
         player = this.gameObject.GetComponent<Player>();
         uIManager = this.gameObject.GetComponent<UIManager>();
+        flightManager = this.gameObject.GetComponent<FlightManager>();
 
         //Read the data saved in Player Prefs
         if (PlayerPrefs.HasKey("SubTimerDuration"))
@@ -71,7 +73,13 @@ public class TimeManager : MonoBehaviour
             // Display the remaining time in MM:SS format
             remainingTimeText.text = "00:00";
             timerStarted = false;
-            startButton.interactable = true;
+
+            startButton.interactable = false;
+            if (flightManager.destinationQueue.Count > 0)
+            {
+                startButton.interactable = true;
+            }
+
             PlayerPrefs.DeleteKey("SavedTime");
             PlayerPrefs.DeleteKey("SubTimerDuration");
             PlayerPrefs.Save();
@@ -100,7 +108,7 @@ public class TimeManager : MonoBehaviour
             {
                 timerStarted = false;
                 remainingTime = 0;
-                startButton.interactable = true;
+                //startButton.interactable = true;
                 PlayerPrefs.DeleteKey("SavedTime");
                 PlayerPrefs.DeleteKey("SubTimerDuration");
                 PlayerPrefs.Save();

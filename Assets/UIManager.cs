@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
 
     FlightManager flightManager;
     [HideInInspector] public Player player;
+    [HideInInspector] public Button buttonToMapOverlay;
 
     private void Start()
     {
@@ -87,6 +88,11 @@ public class UIManager : MonoBehaviour
         {
             UpdateCollectLootButton();
         }
+
+        if (targetObject.name == "BirdSelectionOverlay" && player.flightStatus != FlightStatus.Waiting)
+        {
+            buttonToMapOverlay.onClick.Invoke();
+        }
     }
 
     public void RedrawQueuePanelIcons(bool clearCompletely = false)
@@ -96,23 +102,37 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < maxQueueSize; i++)
         {
-            if (i < queueSize)
+            if (i < queueSize) // Draws slots with scheduled locations
             {
                 // Change each queue size icon to appropriate icon
                 Location location = flightManager.destinationQueue[i];
 
                 scheduleSlotHolders[i].GetComponent<Image>().sprite = location.icon;
 
-                // Adds the cross UI
-                GameObject parentObject = scheduleSlotHolders[i];
-                GameObject childObject = parentObject.transform.Find("Cross")?.gameObject;
-
-                if (childObject != null)
+                if (player.flightStatus == FlightStatus.Waiting)
                 {
-                    childObject.SetActive(true);
+                    // Adds the cross UI
+                    GameObject parentObject = scheduleSlotHolders[i];
+                    GameObject childObject = parentObject.transform.Find("Cross")?.gameObject;
+
+                    if (childObject != null)
+                    {
+                        childObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    // Removes the cross UI
+                    GameObject parentObject = scheduleSlotHolders[i];
+                    GameObject childObject = parentObject.transform.Find("Cross")?.gameObject;
+
+                    if (childObject != null)
+                    {
+                        childObject.SetActive(false);
+                    }
                 }
             }
-            else
+            else // Draws clear slots for unscheduled locations
             {
                 scheduleSlotHolders[i].GetComponent<Image>().sprite = null;
 

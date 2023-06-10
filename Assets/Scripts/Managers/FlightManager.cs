@@ -49,6 +49,8 @@ public class FlightManager : MonoBehaviour
 
         // Update UI information about the queue length
         UpdateQueueLengthUI();
+
+        timeManager.startButton.interactable = true;
     }
 
     public void RemoveDestination(int index)
@@ -56,6 +58,7 @@ public class FlightManager : MonoBehaviour
         if (destinationQueue.Count == 1)
         {
             uIManager.RedrawQueuePanelIcons(true);
+            timeManager.startButton.interactable = false;
         }
 
         var destination = destinationQueue[index];
