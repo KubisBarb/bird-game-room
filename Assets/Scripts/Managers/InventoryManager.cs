@@ -35,9 +35,14 @@ public class InventoryManager : MonoBehaviour
     public void CollectWaitingLoot()
     {
         player.flightStatus = FlightStatus.Waiting;
-        //LootLocation();
+
+        for (int i = 0; i < flightManager.destinationQueue.Count; i++)
+        {
+            LootLocation(flightManager.destinationQueue[i], player.activeBird);
+        }
+
         uIManager.collectLootButton.SetActive(false);
-        flightManager.ResetQueue();   
+        flightManager.ResetQueue();
     }
 
     public void LootLocation(Location location, BirdObject bird)
@@ -124,8 +129,8 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (InventorySlot slot in calculatedLoot.Container)
         {
-            Debug.Log("Received pack of stuff");
             resourceInventory.AddItem(slot.item, slot.amount);
+            Debug.Log("Received pack of stuff");
         }
     }
 

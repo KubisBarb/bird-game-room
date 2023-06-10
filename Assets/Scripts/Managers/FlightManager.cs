@@ -65,7 +65,6 @@ public class FlightManager : MonoBehaviour
 
         destinationQueue.RemoveAt(index); // Index is assigned to each button specifically in the editor based on the slot index
         Debug.Log("Removed destination: " + destination + " at index " + index);
-        Debug.Log("queue size = " + destinationQueue.Count);
 
         uIManager.RedrawQueuePanelIcons();
 

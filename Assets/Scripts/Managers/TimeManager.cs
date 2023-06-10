@@ -229,4 +229,20 @@ public class TimeManager : MonoBehaviour
         PlayerPrefs.SetString("SavedTime", formattedTime);
         PlayerPrefs.Save();
     }
+
+    public string RemainingTimeTotext()
+    {
+        // Calculate the elapsed time
+        float elapsedTime = CalculateElapsedSeconds() * timeMultiplier;
+
+        // Calculate the remaining time in seconds
+        float remainingTime = subTimerDuration - elapsedTime;
+
+        // Convert remaining time to minutes and seconds
+        int minutes = (int)(remainingTime / 60f);
+        int seconds = (int)(remainingTime % 60f);
+
+        // Display the remaining time in MM:SS format
+        return minutes.ToString("00") + ":" + seconds.ToString("00");
+    }
 }

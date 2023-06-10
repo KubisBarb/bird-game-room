@@ -16,6 +16,6 @@ MonoBehaviour:
   level: 1
   specialLocations: []
   portrait: {fileID: 21300000, guid: 25e9501388ee21042b68b12cadf49c7e, type: 3}
-  capacity: 5
+  capacity: 7
   intelligence: 5
   speed: 1.346

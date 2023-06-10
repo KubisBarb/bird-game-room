@@ -21,8 +21,12 @@ public class Player : MonoBehaviour
 
     public GameObject activeBirdOverlay;
 
+    TimeManager timeManager;
+
     private void Start()
     {
+        timeManager = this.gameObject.GetComponent<TimeManager>();
+
         if (activeBird == null)
         {
             activeBird = theNest[0];
@@ -36,7 +40,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        flightStatusText.text = flightStatus.ToString(); // Too lazy to implement correctly
+        //flightStatusText.text = flightStatus.ToString(); // Too lazy to implement correctly
+
+        if (flightStatus == FlightStatus.Waiting)
+        {
+            flightStatusText.text = "No flight scheduled, go to the map to schedule more";
+        }
+        if (flightStatus == FlightStatus.BirdOutside)
+        {
+            flightStatusText.text = "Your warrior is currently outside.\nTime until return: " + timeManager.RemainingTimeTotext();
+        }
+        if (flightStatus == FlightStatus.BirdReturned)
+        {
+            flightStatusText.text = "Your warrior has returned! Click the button to collect loot";
+        }
     }
 
 
