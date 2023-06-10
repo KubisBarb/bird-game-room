@@ -11,11 +11,16 @@ public class UIManager : MonoBehaviour
     public GameObject mapBirdPortraitHolder;
     public GameObject[] scheduleSlotHolders;
     public Sprite lockIcon;
+    public GameObject collectLootButton;
 
     FlightManager flightManager;
+    [HideInInspector] public Player player;
 
     private void Start()
     {
+        flightManager = this.gameObject.GetComponent<FlightManager>();
+        player = this.gameObject.GetComponent<Player>();
+
         foreach (GameObject overlay in UIOverlays)
         {
             overlay.SetActive(false);
@@ -26,7 +31,7 @@ public class UIManager : MonoBehaviour
             UIOverlays[0].SetActive(true);
         }
 
-        flightManager = this.gameObject.GetComponent<FlightManager>();
+        UpdateCollectLootButton();
     }
 
     public void HideObject(GameObject targetObject)
@@ -77,18 +82,37 @@ public class UIManager : MonoBehaviour
             RedrawQueuePanelIcons();
             flightManager.UpdateQueueLengthUI();
         }
+
+        if (targetObject.name == "RoomOverlay")
+        {
+            UpdateCollectLootButton();
+        }
     }
 
     public void RedrawQueuePanelIcons(bool clearCompletely = false)
     {
         int queueSize = flightManager.destinationQueue.Count;
+        int maxQueueSize = this.gameObject.GetComponent<Player>().activeBird.level;
 
-        for (int i = 0; i < queueSize; i++)
+        for (int i = 0; i < maxQueueSize; i++)
         {
-            // Change each queue size icon to appropriate icon
-            Location location = flightManager.destinationQueue[i];
+            if (i < queueSize)
+            {
+                // Change each queue size icon to appropriate icon
+                Location location = flightManager.destinationQueue[i];
 
-            if (clearCompletely)
+                scheduleSlotHolders[i].GetComponent<Image>().sprite = location.icon;
+
+                // Adds the cross UI
+                GameObject parentObject = scheduleSlotHolders[i];
+                GameObject childObject = parentObject.transform.Find("Cross")?.gameObject;
+
+                if (childObject != null)
+                {
+                    childObject.SetActive(true);
+                }
+            }
+            else
             {
                 scheduleSlotHolders[i].GetComponent<Image>().sprite = null;
 
@@ -101,19 +125,18 @@ public class UIManager : MonoBehaviour
                     childObject.SetActive(false);
                 }
             }
-            else
-            {
-                scheduleSlotHolders[i].GetComponent<Image>().sprite = location.icon;
+        }
+    }
 
-                // Adds the cross UI
-                GameObject parentObject = scheduleSlotHolders[i];
-                GameObject childObject = parentObject.transform.Find("Cross")?.gameObject;
-
-                if (childObject != null)
-                {
-                    childObject.SetActive(true);
-                }
-            }
+    public void UpdateCollectLootButton()
+    {
+        if (player.flightStatus == FlightStatus.BirdReturned)
+        {
+            collectLootButton.SetActive(true);
+        }
+        else
+        {
+            collectLootButton.SetActive(false);
         }
     }
 }

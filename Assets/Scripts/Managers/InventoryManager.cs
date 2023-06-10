@@ -11,10 +11,18 @@ public class InventoryManager : MonoBehaviour
     public InventoryObject resourceInventory;
     public InventoryObject decorationInventory;
 
+    Player player;
+    UIManager uIManager;
+    FlightManager flightManager;
+
     private void Awake()
     {
         // Load the coins value from PlayerPrefs when the game starts
         gems = PlayerPrefs.GetInt(GemsKey);
+
+        player = this.gameObject.GetComponent<Player>();
+        uIManager = this.gameObject.GetComponent<UIManager>();
+        flightManager = this.gameObject.GetComponent<FlightManager>();
     }
 
     private void OnDestroy()
@@ -22,6 +30,14 @@ public class InventoryManager : MonoBehaviour
         // Save the coins value to PlayerPrefs when the game closes or object is destroyed
         PlayerPrefs.SetInt(GemsKey, gems);
         PlayerPrefs.Save();
+    }
+
+    public void CollectWaitingLoot()
+    {
+        player.flightStatus = FlightStatus.Waiting;
+        //LootLocation();
+        uIManager.collectLootButton.SetActive(false);
+        flightManager.ResetQueue();   
     }
 
     public void LootLocation(Location location, BirdObject bird)

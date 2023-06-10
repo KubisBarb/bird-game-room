@@ -48,7 +48,7 @@ public class DraggableImage : MonoBehaviour, IPointerDownHandler, IDragHandler
         return worldPosition;
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         // Draw gizmos for the focus position
         Gizmos.color = Color.red;
@@ -63,11 +63,11 @@ public class DraggableImage : MonoBehaviour, IPointerDownHandler, IDragHandler
         // Draw a line between focus and icon positions
         Gizmos.color = Color.white;
         Gizmos.DrawLine(focusPosition, iconPosition);
-    }
+    }*/
 
     private void Update()
     {
-        if (focusingOnLocation)
+        /*if (focusingOnLocation)
         {
             // Calculate the vector from the original location to the desired location, wanted - original
             Vector3 offset = RecalculateFocusPosition() - RecalculateIconPosition();
@@ -78,7 +78,7 @@ public class DraggableImage : MonoBehaviour, IPointerDownHandler, IDragHandler
             Debug.Log(offset);
 
             focusingOnLocation = false;
-        }
+        }*/
     }
 
     private void CalculateDragBounds()
@@ -119,7 +119,7 @@ public class DraggableImage : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     public void FocusOnLocation()
     {
-        focusingOnLocation = true;
+        //focusingOnLocation = true;
     }
 
 }

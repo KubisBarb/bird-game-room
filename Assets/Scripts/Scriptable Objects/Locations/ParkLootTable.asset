@@ -9,7 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb8f9a465558bf48a1fe1739cf3efcd, type: 3}
-  m_Name: ResourceInventory
+  m_Script: {fileID: 11500000, guid: d66212bf6a443bf429582ce63f76eae6, type: 3}
+  m_Name: ParkLootTable
   m_EditorClassIdentifier: 
-  Container: []
+  lootOptions:
+  - resourceName: Yarn
+    resourceObject: {fileID: 11400000, guid: 56849964841828e459cb99e5811f47c9, type: 2}
+    rarityChance: 1
+    minQuantity: 1
+    maxQuantity: 1

@@ -34,6 +34,11 @@ public class Player : MonoBehaviour
         flightStatusText.text = flightStatus.ToString();
     }
 
+    private void Update()
+    {
+        flightStatusText.text = flightStatus.ToString(); // Too lazy to implement correctly
+    }
+
 
     public void EquipBird(BirdObject bird)
     {

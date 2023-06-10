@@ -51,11 +51,36 @@ public class FlightManager : MonoBehaviour
         UpdateQueueLengthUI();
     }
 
+    public void RemoveDestination(int index)
+    {
+        if (destinationQueue.Count == 1)
+        {
+            uIManager.RedrawQueuePanelIcons(true);
+        }
+
+        var destination = destinationQueue[index];
+
+        destinationQueue.RemoveAt(index); // Index is assigned to each button specifically in the editor based on the slot index
+        Debug.Log("Removed destination: " + destination + " at index " + index);
+        Debug.Log("queue size = " + destinationQueue.Count);
+
+        uIManager.RedrawQueuePanelIcons();
+
+        if(destination.searchDurationMinutes > timeManager.timerDurationMinutes)
+        {
+            timeManager.timerDurationMinutes = 0f;
+        }
+        else
+        {
+            timeManager.timerDurationMinutes -= destination.searchDurationMinutes;
+        }
+
+        UpdateQueueLengthUI();
+    }
+
     // Function to reset the destination queue
     public void ResetQueue()
     {
-        uIManager.RedrawQueuePanelIcons(true);
-
         destinationQueue.Clear();
         Debug.Log("Destination queue has been reset!");
 
@@ -64,6 +89,8 @@ public class FlightManager : MonoBehaviour
         {
             Destroy(circle);
         }
+
+        uIManager.RedrawQueuePanelIcons(true);
 
         timeManager.timerDurationMinutes = 0f;
 
