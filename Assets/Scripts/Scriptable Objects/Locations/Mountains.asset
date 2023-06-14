@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64bbed46712cda24bada7154ab77cdb8, type: 3}
-  m_Name: Park
+  m_Name: Mountains
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  searchDurationMinutes: 0.2
+  searchDurationMinutes: 1
   birdSpeciesRequirement: []
-  lootTable: {fileID: 11400000, guid: a855487e8a68b3747b66704e5ba50eda, type: 2}
-  description: 
-  icon: {fileID: 21300000, guid: d36e4e0fc351794479084e9f027bf608, type: 3}
-  panelPrefab: {fileID: 4567232385739885397, guid: 282765994d33410448632855459dc614, type: 3}
+  lootTable: {fileID: 11400000, guid: e27739665b1eec447b638251860e388f, type: 2}
+  description: nejde to
+  icon: {fileID: 21300000, guid: fb20d44956835954abbecab042bf391a, type: 3}
+  panelPrefab: {fileID: 7289201028791255413, guid: 8bd452af4ae7e6a458243d5ead930238, type: 3}

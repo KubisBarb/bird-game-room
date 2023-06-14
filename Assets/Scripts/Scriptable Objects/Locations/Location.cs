@@ -9,6 +9,7 @@ public class Location : LocationObject
     {
         // Creates a temporary inventory for the items location produced
         InventoryObject lootPack = ScriptableObject.CreateInstance<InventoryObject>();
+        lootPack.Container.Clear();
 
         foreach (LootOption option in lootTable.lootOptions)
         {

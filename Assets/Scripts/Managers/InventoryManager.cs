@@ -32,19 +32,6 @@ public class InventoryManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void CollectWaitingLoot()
-    {
-        player.flightStatus = FlightStatus.Waiting;
-
-        for (int i = 0; i < flightManager.destinationQueue.Count; i++)
-        {
-            LootLocation(flightManager.destinationQueue[i], player.activeBird);
-        }
-
-        uIManager.collectLootButton.SetActive(false);
-        flightManager.ResetQueue();
-    }
-
     public void LootLocation(Location location, BirdObject bird)
     {
         InventoryObject lootFromLocation = location.CalculateLoot();    // This the the loot location has produced
@@ -70,7 +57,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Birds intelligence is higher that it's capacity");
+                Debug.Log("Birds intelligence is higher or equal to it's capacity");
             }
         }
 
@@ -90,7 +77,7 @@ public class InventoryManager : MonoBehaviour
 
         if (finalLoot.GetTotalItemCount(finalLoot) != bird.intelligence)
         {
-            Debug.Log("Birds intelligence picked more items than allowed. Difference: " + (finalLoot.GetTotalItemCount(finalLoot) != bird.intelligence).ToString());
+            Debug.Log("Birds intelligence picked more items than allowed. Difference: " + (finalLoot.GetTotalItemCount(finalLoot) - bird.intelligence).ToString());
         }
         else
         {
@@ -110,6 +97,20 @@ public class InventoryManager : MonoBehaviour
         ReceiveLoot(finalLoot);
     }
 
+    public void CollectWaitingLoot()
+    {
+        player.flightStatus = FlightStatus.Waiting;
+
+        for (int i = 0; i < flightManager.destinationQueue.Count; i++)
+        {
+            LootLocation(flightManager.destinationQueue[i], player.activeBird);
+        }
+
+        uIManager.collectLootButton.SetActive(false);
+        flightManager.ResetQueue();
+    }
+
+    
     public InventoryObject GetSortedInventoryByRarity(InventoryObject inventoryToSort, LootTable lootTable)
     {
         InventoryObject sortedInventory = ScriptableObject.CreateInstance<InventoryObject>();

@@ -21,13 +21,11 @@ public class LootTable : ScriptableObject
 }
 
 [System.Serializable]
-#nullable enable
 public class LootOption
 {
-    public string? resourceName;
-    public ItemObject? resourceObject;
+    public string resourceName;
+    public ItemObject resourceObject;
     public float rarityChance = 0f;
     public int minQuantity = 0;
     public int maxQuantity = 0;
 }
-#nullable disable

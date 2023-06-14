@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d66212bf6a443bf429582ce63f76eae6, type: 3}
-  m_Name: ParkLootTable
+  m_Name: MountainLootTable
   m_EditorClassIdentifier: 
   lootOptions:
   - resourceName: Feather
     resourceObject: {fileID: 11400000, guid: 3e06ee7b87cc2c3469fe84430a91d9de, type: 2}
-    rarityChance: 1
+    rarityChance: 0
     minQuantity: 10
     maxQuantity: 20
   - resourceName: Pottery Shard
     resourceObject: {fileID: 11400000, guid: 957da718d2ff6c24185d24d6f5fab59d, type: 2}
-    rarityChance: 0.5
+    rarityChance: 1
     minQuantity: 4
     maxQuantity: 10
