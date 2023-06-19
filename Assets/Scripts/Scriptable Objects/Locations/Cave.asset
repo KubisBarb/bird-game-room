@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bbed46712cda24bada7154ab77cdb8, type: 3}
+  m_Name: Cave
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  searchDurationMinutes: 1
+  birdSpeciesRequirement: []
+  lootTable: {fileID: 11400000, guid: 3c81a9f9ec8fe17499b280301113d325, type: 2}
+  description: nejde to
+  icon: {fileID: 21300000, guid: 78a82139a66b67640ab5ef8f95d2f3b8, type: 3}
+  panelPrefab: {fileID: 7078085953846313943, guid: 4fcbfdd9161ee6648b8464e5e150f886, type: 3}

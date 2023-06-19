@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
 
             activeBirdOverlay.GetComponent<ActiveBirdUI>().birdPortrait.sprite = activeBird.portrait;
             activeBirdOverlay.GetComponent<ActiveBirdUI>().nameText.text = activeBird.name;
+            activeBirdOverlay.GetComponent<ActiveBirdUI>().descriptionText.text = activeBird.descriptionToPlayer;
         }
 
         flightStatusText.text = flightStatus.ToString();
@@ -115,6 +116,7 @@ public class Player : MonoBehaviour
 
         activeBirdOverlay.GetComponent<ActiveBirdUI>().birdPortrait.sprite = activeBird.portrait;
         activeBirdOverlay.GetComponent<ActiveBirdUI>().nameText.text = activeBird.name;
+        activeBirdOverlay.GetComponent<ActiveBirdUI>().descriptionText.text = activeBird.descriptionToPlayer;
 
         Debug.Log("Active bird changed to: " + activeBird.name);
     }

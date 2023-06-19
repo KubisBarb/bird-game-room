@@ -7,6 +7,8 @@ public class BirdObject : ScriptableObject
     public int level;
     public Location[] specialLocations;
     public Sprite portrait;
+    [TextArea(5, 20)]
+    public string descriptionToPlayer;
 
     [Tooltip("Represents maximum number of items a bird can bring from a location, even if it produces more.")]
     [Range(0, 25)]

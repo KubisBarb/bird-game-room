@@ -15,7 +15,10 @@ MonoBehaviour:
   isUnlocked: 1
   level: 1
   specialLocations: []
-  portrait: {fileID: 21300000, guid: 8daf15d115aa3ee46b51b76043c5ef0b, type: 3}
+  portrait: {fileID: 21300000, guid: 21655ce7958b90b4e9104f0f6b07f8e9, type: 3}
+  descriptionToPlayer: 'LVL 1
+
+    Special location: The Cave'
   capacity: 10
   intelligence: 6
   speed: 1

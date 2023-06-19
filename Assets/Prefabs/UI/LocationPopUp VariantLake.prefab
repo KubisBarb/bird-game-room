@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4064760228482133908, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
       propertyPath: myLocation
       value: 
-      objectReference: {fileID: 11400000, guid: e467d2a3c0316d54da1394c7a54d1ef6, type: 2}
+      objectReference: {fileID: 11400000, guid: 71ee81eda806da440958a1e3ad171960, type: 2}
     - target: {fileID: 8347478340272058784, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
       propertyPath: m_Name
       value: LocationPopUp VariantLake

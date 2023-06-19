@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66212bf6a443bf429582ce63f76eae6, type: 3}
+  m_Name: CorpLootTable
+  m_EditorClassIdentifier: 
+  lootOptions:
+  - resourceName: Feather
+    resourceObject: {fileID: 11400000, guid: 3e06ee7b87cc2c3469fe84430a91d9de, type: 2}
+    rarityChance: 0
+    minQuantity: 10
+    maxQuantity: 20
+  - resourceName: Pottery Shard
+    resourceObject: {fileID: 11400000, guid: 957da718d2ff6c24185d24d6f5fab59d, type: 2}
+    rarityChance: 1
+    minQuantity: 4
+    maxQuantity: 10

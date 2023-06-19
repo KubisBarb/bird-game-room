@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8347478340272058784, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
       propertyPath: m_Name
-      value: LocationPopUp
+      value: LocationPopUp VariantPark
       objectReference: {fileID: 0}
     - target: {fileID: 8347478340272058785, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
       propertyPath: m_Pivot.x
@@ -94,6 +94,17 @@ PrefabInstance:
     - target: {fileID: 8347478340272058785, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347478340472448533, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
+      propertyPath: m_text
+      value: Central Park
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347478340802387417, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}
+      propertyPath: m_text
+      value: '4-10 Feathers
+
+
+        Search time: 1 minute'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc84c0aef247b044d98375a3e07a8b45, type: 3}

@@ -16,7 +16,10 @@ MonoBehaviour:
   level: 3
   specialLocations:
   - {fileID: 11400000, guid: e467d2a3c0316d54da1394c7a54d1ef6, type: 2}
-  portrait: {fileID: 21300000, guid: 5255563f774f37042823e9727f7e7939, type: 3}
+  portrait: {fileID: 21300000, guid: a4026e9335758b9408244a5723b46f49, type: 3}
+  descriptionToPlayer: 'LVL 3
+
+    Special location: The Neighborhood'
   capacity: 8
   intelligence: 3
   speed: 1

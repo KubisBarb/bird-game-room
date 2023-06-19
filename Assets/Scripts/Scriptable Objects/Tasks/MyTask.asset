@@ -17,10 +17,12 @@ MonoBehaviour:
   description: i test stuff here
   isUnlocked: 1
   isCompleted: 0
-  displayedName: El Feathero
+  displayedName: My First Task
   taskDescriptionToPlayer: Mr Nikita needs this very important delivery for his event.
-  requiredTasks: []
-  followingTasks: []
+  requiredTasks:
+  - {fileID: 0}
+  followingTasks:
+  - {fileID: 0}
   RequiredItems:
   - item: {fileID: 11400000, guid: 3e06ee7b87cc2c3469fe84430a91d9de, type: 2}
     amount: 5

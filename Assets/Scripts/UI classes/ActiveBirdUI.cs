@@ -8,4 +8,5 @@ public class ActiveBirdUI : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public Image birdPortrait;
+    public TextMeshProUGUI descriptionText;
 }

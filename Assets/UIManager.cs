@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject mapBirdPortraitHolder;
     public GameObject[] scheduleSlotHolders;
     public Sprite lockIcon;
+    public Sprite emptySlotSprite;
     public GameObject collectLootButton;
 
     FlightManager flightManager;
@@ -134,7 +135,7 @@ public class UIManager : MonoBehaviour
             }
             else // Draws clear slots for unscheduled locations
             {
-                scheduleSlotHolders[i].GetComponent<Image>().sprite = null;
+                scheduleSlotHolders[i].GetComponent<Image>().sprite = emptySlotSprite;
 
                 // Clears crosses
                 GameObject parentObject = scheduleSlotHolders[i];

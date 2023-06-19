@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bbed46712cda24bada7154ab77cdb8, type: 3}
+  m_Name: Market
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  searchDurationMinutes: 1
+  birdSpeciesRequirement: []
+  lootTable: {fileID: 11400000, guid: 3c81a9f9ec8fe17499b280301113d325, type: 2}
+  description: nejde to
+  icon: {fileID: 21300000, guid: 3b343839cedb1204eb85d36628c9b7eb, type: 3}
+  panelPrefab: {fileID: 1606317268969749047, guid: 918e880915294214d8d34ba7f3f5e5ac, type: 3}
